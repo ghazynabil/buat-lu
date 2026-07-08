@@ -3,65 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Letter for You</title>
+    <title>A Special Letter</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
     <div id="welcome-screen">
+        <div class="flower-petal pink">🌸</div>
+        <div class="flower-petal blue">🦋</div>
+        <div class="flower-petal yellow">✨</div>
+        <div class="flower-petal pink" style="left:20%; animation-delay:2s;">🌸</div>
+        <div class="flower-petal blue" style="left:70%; animation-delay:1.5s;">🦋</div>
+        <div class="flower-petal yellow" style="left:85%; animation-delay:3s;">✨</div>
+
         <div class="welcome-content">
-            <h1>Untukmu...</h1>
-            <p>Sentuh layar untuk membuka</p>
-            <button onclick="startExperience()">Buka</button>
+            <h1 class="handwriting">Halo, Tuan Putri...</h1>
+            <p>Ada sebuah surat misterius yang jatuh di hutan ajaib.</p>
+            <p class="question">Apakah kamu ingin melihat isi suratnya?</p>
+            
+            <div class="button-group">
+                <button class="btn-choice btn-yes" onclick="startExperience()">Mau Mau! ✨</button>
+                <button class="btn-choice btn-no" onclick="refuseLetter()">Enggak Dulu 🤭</button>
+            </div>
         </div>
     </div>
 
     <div id="main-scene" class="hidden">
         <div class="forest-bg"></div>
-        
         <div class="carriage"></div>
-
-        <div class="flying-letter" id="flyingLetter" onclick="openLetter()">
-            ✉️
-        </div>
+        <div class="flying-letter" id="flyingLetter" onclick="openLetter()">✉️</div>
     </div>
 
     <div id="letter-modal" class="hidden">
-        <div class="letter-container" id="letterContainer">
-            
+        <div class="letter-container">
             <div class="letter-front" id="letterFront">
-                <h2 class="handwriting">Hai, Tuan Putri...</h2>
-                <p>Semoga harimu seindah hutan ajaib ini. Ingatlah bahwa kamu selalu bersinar seperti emas di kereta kudamu.</p>
-                <p>Jaga dirimu baik-baik, ya.</p>
+                <h2 class="handwriting">Untukmu...</h2>
+                <p>Semoga harimu seindah warna pastel di awal tadi. Ingatlah bahwa kamu berharga dan selalu bersinar.</p>
                 <button class="btn-reply" onclick="flipToReply()">Balas Surat</button>
             </div>
 
             <div class="letter-back hidden" id="letterBack">
-                <h2 class="handwriting">Balasanmu:</h2>
-                <textarea placeholder="Tulis sesuatu di sini..."></textarea>
-                <button class="btn-send" onclick="sendReply()">Terbangkan Balasan ✨</button>
+                <h2 class="handwriting">Tulis Balasanmu:</h2>
+                <textarea placeholder="Ketik jawabanmu di sini ya..."></textarea>
+                <button class="btn-send" onclick="sendReply()">Terbangkan Balasan 🕊️</button>
             </div>
-
         </div>
     </div>
 
     <script>
         function startExperience() {
-            // Memulai musik
+            // Putar lagu Daniel Caesar - Always
             const music = document.getElementById('bgMusic');
-            music.play().catch(e => console.log("Audio diblokir browser, butuh interaksi user pertama kali."));
-            
-            // Menghilangkan Welcome Screen dengan transisi halus
+            music.play().catch(e => console.log("Audio play diblokir browser."));
+
+            // Transisi keluar welcome screen
             const welcome = document.getElementById('welcome-screen');
             welcome.style.opacity = '0';
+            
             setTimeout(() => {
                 welcome.style.display = 'none';
                 document.getElementById('main-scene').classList.remove('hidden');
                 
-                // Surat muncul dan terbang jatuh setelah 4 detik (menunggu kereta lewat)
+                // Surat terbang muncul setelah kereta lewat (4 detik)
                 setTimeout(() => {
                     const letter = document.getElementById('flyingLetter');
                     letter.style.opacity = '1';
@@ -70,12 +76,14 @@
             }, 1000);
         }
 
+        function refuseLetter() {
+            alert("Yah... keretanya putar balik deh 🤭 Buka lagi kalau sudah siap ya!");
+        }
+
         function openLetter() {
             const modal = document.getElementById('letter-modal');
             modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.style.opacity = '1';
-            }, 10);
+            setTimeout(() => modal.style.opacity = '1', 10);
         }
 
         function flipToReply() {
@@ -84,8 +92,7 @@
         }
 
         function sendReply() {
-            alert('Balasanmu telah dilipat menjadi burung kertas dan diterbangkan ke langit! ✨');
-            // Catatan: Di sini bisa diintegrasikan dengan backend email seperti Formspree jika ingin menerima input teks asli.
+            alert('Balasanmu sudah berubah jadi burung kertas dan terbang ke langit! ✨');
         }
     </script>
 </body>
