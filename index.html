@@ -3,226 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magical Virtual Letter</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* 1. Efek Bunga Bertaburan (Petals) */
-        .petal {
-            position: absolute;
-            top: -20px;
-            font-size: 20px;
-            pointer-events: none;
-            animation: fadeAndFall linear forwards;
-        }
-        @keyframes fadeAndFall {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* 2. Princess Barbie Naik Kuda */
-        .princess-container {
-            position: absolute;
-            bottom: 10%;
-            left: -150px; /* Mulai dari luar layar kiri */
-            font-size: 80px;
-            line-height: 1;
-            z-index: 2;
-            animation: rideIn 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 1.5s; /* Muncul setelah bunga bertaburan */
-        }
-        @keyframes rideIn {
-            to {
-                left: calc(50% - 40px); /* Berhenti di tengah layar */
-            }
-        }
-
-        /* 3. Surat Terbang ke Muka */
-        .flying-letter {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            font-size: 40px;
-            z-index: 3;
-            opacity: 0;
-            animation: flyToFace 2s ease-in-out forwards;
-            animation-delay: 5.5s; /* Terbang setelah princess berhenti */
-            cursor: pointer;
-        }
-        @keyframes flyToFace {
-            0% {
-                top: -50px;
-                right: -50px;
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                top: calc(10% + 20px);
-                right: calc(50% - 20px);
-                opacity: 1;
-                transform: scale(1.5);
-            }
-        }
-
-        /* Efek surat bergetar/glowing menandakan bisa diklik */
-        .interactive {
-            animation: pulseGlow 1.5s infinite alternate !important;
-        }
-        @keyframes pulseGlow {
-            to { transform: scale(1.7); filter: drop-shadow(0 0 10px #fff); }
-        }
-
-        /* 4. Tampilan Surat Isi Setelah Dibuka */
-        .letter-content {
-            display: none; /* Sembunyi di awal */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-            z-index: 10;
-            opacity: 0;
-        }
-        .letter-content.open {
-            display: block;
-            animation: openLetter 0.5s ease-out forwards;
-        }
-        @keyframes openLetter {
-            to {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-        }
-        .letter-content h2 {
-            color: #ff4d6d;
-            margin-top: 0;
-        }
-        .letter-content p {
-            color: #444;
-            line-height: 1.6;
-        }
-
-        /* Tombol Musik manual jika autoplay diblokir browser */
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            z-index: 100;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-    </style>
+    <title>A Letter for You</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="petal-field"></div>
+    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
-    <div class="princess-container">
-        👸<br>🐎
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h1>Untukmu...</h1>
+            <p>Sentuh layar untuk membuka</p>
+            <button onclick="startExperience()">Buka</button>
+        </div>
     </div>
 
-    <div class="flying-letter" id="letter" onclick="bukaSurat()">💌</div>
+    <div id="main-scene" class="hidden">
+        <div class="forest-bg"></div>
+        
+        <div class="carriage"></div>
 
-    <div class="letter-content" id="card">
-        <h2>Spesial Untukmu ✨</h2>
-        <p>Hai Tuan Putri! Surat ini terbang melewati batas layar demi menyampaikan kalau kehadiranmu itu berharga banget.</p>
-        <p>Terima kasih ya sudah selalu jadi orang yang baik dan luar biasa. *Cue lagu Always - Daniel Caesar melow di background* 🎵</p>
-        <button onclick="tutupSurat()" style="background:#ff4d6d; color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Tutup</button>
+        <div class="flying-letter" id="flyingLetter" onclick="openLetter()">
+            ✉️
+        </div>
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-    </audio>
-    <button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+    <div id="letter-modal" class="hidden">
+        <div class="letter-container" id="letterContainer">
+            
+            <div class="letter-front" id="letterFront">
+                <h2 class="handwriting">Hai, Tuan Putri...</h2>
+                <p>Semoga harimu seindah hutan ajaib ini. Ingatlah bahwa kamu selalu bersinar seperti emas di kereta kudamu.</p>
+                <p>Jaga dirimu baik-baik, ya.</p>
+                <button class="btn-reply" onclick="flipToReply()">Balas Surat</button>
+            </div>
+
+            <div class="letter-back hidden" id="letterBack">
+                <h2 class="handwriting">Balasanmu:</h2>
+                <textarea placeholder="Tulis sesuatu di sini..."></textarea>
+                <button class="btn-send" onclick="sendReply()">Terbangkan Balasan ✨</button>
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        // Membuat efek bunga jatuh di awal
-        const petalField = document.getElementById('petal-field');
-        const flowers = ['🌸', '🌹', '🌺', '✨', '💮'];
-        
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-            petalField.appendChild(petal);
+        function startExperience() {
+            // Memulai musik
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Audio diblokir browser, butuh interaksi user pertama kali."));
             
-            setTimeout(() => { petal.remove(); }, 5000);
+            // Menghilangkan Welcome Screen dengan transisi halus
+            const welcome = document.getElementById('welcome-screen');
+            welcome.style.opacity = '0';
+            setTimeout(() => {
+                welcome.style.display = 'none';
+                document.getElementById('main-scene').classList.remove('hidden');
+                
+                // Surat muncul dan terbang jatuh setelah 4 detik (menunggu kereta lewat)
+                setTimeout(() => {
+                    const letter = document.getElementById('flyingLetter');
+                    letter.style.opacity = '1';
+                    letter.style.animation = 'flyDown 4s ease-in-out forwards';
+                }, 4000);
+            }, 1000);
         }
 
-        // Hujan bunga otomatis selama 5 detik pertama
-        const petalInterval = setInterval(createPetal, 150);
-        setTimeout(() => { clearInterval(petalInterval); }, 6000);
-
-        // Mengatur transisi animasi surat setelah sampai di muka princess
-        const letter = document.getElementById('letter');
-        letter.addEventListener('animationend', (e) => {
-            if(e.animationName === 'flyToFace') {
-                letter.classList.add('interactive');
-            }
-        });
-
-        // Fungsi interaksi buka tutup surat
-        function bukaSurat() {
-            document.getElementById('card').classList.add('open');
-            letter.style.display = 'none';
-            playMusic();
+        function openLetter() {
+            const modal = document.getElementById('letter-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
         }
 
-        function tutupSurat() {
-            document.getElementById('card').classList.remove('open');
-            letter.style.display = 'block';
-            letter.classList.remove('interactive');
-            // Reset animasi biar bisa terbang lagi kalau mau
+        function flipToReply() {
+            document.getElementById('letterFront').classList.add('hidden');
+            document.getElementById('letterBack').classList.remove('hidden');
         }
 
-        // Fungsi Kontrol Musik
-        const music = document.getElementById('bg-music');
-        function playMusic() {
-            music.play().catch(() => {
-                console.log("Autoplay diblokir browser, silakan klik tombol musik di pojok kanan bawah.");
-            });
-        }
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
+        function sendReply() {
+            alert('Balasanmu telah dilipat menjadi burung kertas dan diterbangkan ke langit! ✨');
+            // Catatan: Di sini bisa diintegrasikan dengan backend email seperti Formspree jika ingin menerima input teks asli.
         }
     </script>
 </body>
