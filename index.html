@@ -3,139 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Animasi Spesial</title>
+    <title>Magical Virtual Letter</title>
     <style>
-        /* Mengatur font dan background warna gradien */
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Mencegah layar bisa di-scroll saat ada animasi terbang */
         }
 
-        /* Styling dan animasi untuk kotak surat utama */
-        .envelope {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 105, 135, 0.3);
-            text-align: center;
-            max-width: 400px;
-            width: 85%;
-            position: relative;
-            z-index: 10;
-            
-            /* Animasi dimulai dari transparan dan posisi agak di bawah */
-            opacity: 0;
-            transform: translateY(50px);
-            animation: slideUpFade 1.2s ease-out forwards;
-            animation-delay: 0.3s;
+        /* 1. Efek Bunga Bertaburan (Petals) */
+        .petal {
+            position: absolute;
+            top: -20px;
+            font-size: 20px;
+            pointer-events: none;
+            animation: fadeAndFall linear forwards;
         }
-
-        /* Keyframes untuk kotak surat meluncur ke atas */
-        @keyframes slideUpFade {
-            to {
+        @keyframes fadeAndFall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
                 opacity: 1;
-                transform: translateY(0);
             }
-        }
-
-        /* Styling dan animasi untuk judul */
-        h1 {
-            color: #ff4d6d;
-            font-size: 28px;
-            margin-bottom: 10px;
-            animation: pulseText 2s infinite alternate;
-        }
-
-        @keyframes pulseText {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
-        }
-
-        /* Styling dan animasi efek teks muncul pelan-pelan */
-        p {
-            color: #555555;
-            line-height: 1.6;
-            font-size: 16px;
-            opacity: 0;
-            animation: fadeInText 1s ease-in forwards;
-            animation-delay: 1.5s; /* Teks muncul setelah kotak surat selesai meluncur */
-        }
-
-        @keyframes fadeInText {
-            to { opacity: 1; }
-        }
-
-        /* Animasi detak jantung buat ikon paling bawah */
-        .heart {
-            font-size: 50px;
-            margin-top: 25px;
-            display: inline-block;
-            animation: heartbeat 1.2s infinite;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        /* --- Animasi Background Hati Melayang --- */
-        .floating-hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none; /* Supaya background tidak menutupi klik pada surat */
-        }
-
-        .floating-hearts span {
-            position: absolute;
-            bottom: -50px;
-            font-size: 24px;
-            animation: floatUp linear infinite;
-        }
-
-        /* Posisi dan kecepatan beda-beda tiap emoji */
-        .floating-hearts span:nth-child(1) { left: 10%; animation-duration: 5s; animation-delay: 0s; }
-        .floating-hearts span:nth-child(2) { left: 30%; animation-duration: 7s; animation-delay: 2s; }
-        .floating-hearts span:nth-child(3) { left: 50%; animation-duration: 6s; animation-delay: 1s; }
-        .floating-hearts span:nth-child(4) { left: 70%; animation-duration: 8s; animation-delay: 3s; }
-        .floating-hearts span:nth-child(5) { left: 90%; animation-duration: 5.5s; animation-delay: 1.5s; }
-
-        @keyframes floatUp {
-            to {
-                transform: translateY(-110vh) rotate(360deg);
+            100% {
+                transform: translateY(105vh) translateX(100px) rotate(360deg);
                 opacity: 0;
             }
+        }
+
+        /* 2. Princess Barbie Naik Kuda */
+        .princess-container {
+            position: absolute;
+            bottom: 10%;
+            left: -150px; /* Mulai dari luar layar kiri */
+            font-size: 80px;
+            line-height: 1;
+            z-index: 2;
+            animation: rideIn 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 1.5s; /* Muncul setelah bunga bertaburan */
+        }
+        @keyframes rideIn {
+            to {
+                left: calc(50% - 40px); /* Berhenti di tengah layar */
+            }
+        }
+
+        /* 3. Surat Terbang ke Muka */
+        .flying-letter {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            font-size: 40px;
+            z-index: 3;
+            opacity: 0;
+            animation: flyToFace 2s ease-in-out forwards;
+            animation-delay: 5.5s; /* Terbang setelah princess berhenti */
+            cursor: pointer;
+        }
+        @keyframes flyToFace {
+            0% {
+                top: -50px;
+                right: -50px;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                top: calc(10% + 20px);
+                right: calc(50% - 20px);
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Efek surat bergetar/glowing menandakan bisa diklik */
+        .interactive {
+            animation: pulseGlow 1.5s infinite alternate !important;
+        }
+        @keyframes pulseGlow {
+            to { transform: scale(1.7); filter: drop-shadow(0 0 10px #fff); }
+        }
+
+        /* 4. Tampilan Surat Isi Setelah Dibuka */
+        .letter-content {
+            display: none; /* Sembunyi di awal */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 10;
+            opacity: 0;
+        }
+        .letter-content.open {
+            display: block;
+            animation: openLetter 0.5s ease-out forwards;
+        }
+        @keyframes openLetter {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        .letter-content h2 {
+            color: #ff4d6d;
+            margin-top: 0;
+        }
+        .letter-content p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* Tombol Musik manual jika autoplay diblokir browser */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 100;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <div class="floating-hearts">
-        <span>💖</span>
-        <span>✨</span>
-        <span>💕</span>
-        <span>💖</span>
-        <span>✨</span>
+    <div id="petal-field"></div>
+
+    <div class="princess-container">
+        👸<br>🐎
     </div>
 
-    <div class="envelope">
-        <h1>Hai, Kamu!</h1>
-        <p>Surat ini dibikin khusus pakai sedikit keajaiban animasi lho. 🪄</p>
-        <p>Cuma mau bilang makasih ya sudah jadi alasan senyumanku hari ini. Semoga harimu menyenangkan dan jauh lebih indah dari hari kemarin!</p>
-        <div class="heart">💌</div>
+    <div class="flying-letter" id="letter" onclick="bukaSurat()">💌</div>
+
+    <div class="letter-content" id="card">
+        <h2>Spesial Untukmu ✨</h2>
+        <p>Hai Tuan Putri! Surat ini terbang melewati batas layar demi menyampaikan kalau kehadiranmu itu berharga banget.</p>
+        <p>Terima kasih ya sudah selalu jadi orang yang baik dan luar biasa. *Cue lagu Always - Daniel Caesar melow di background* 🎵</p>
+        <button onclick="tutupSurat()" style="background:#ff4d6d; color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Tutup</button>
     </div>
 
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
+    <button class="music-btn" onclick="toggleMusic()">🎵 Play Music</button>
+
+    <script>
+        // Membuat efek bunga jatuh di awal
+        const petalField = document.getElementById('petal-field');
+        const flowers = ['🌸', '🌹', '🌺', '✨', '💮'];
+        
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            petalField.appendChild(petal);
+            
+            setTimeout(() => { petal.remove(); }, 5000);
+        }
+
+        // Hujan bunga otomatis selama 5 detik pertama
+        const petalInterval = setInterval(createPetal, 150);
+        setTimeout(() => { clearInterval(petalInterval); }, 6000);
+
+        // Mengatur transisi animasi surat setelah sampai di muka princess
+        const letter = document.getElementById('letter');
+        letter.addEventListener('animationend', (e) => {
+            if(e.animationName === 'flyToFace') {
+                letter.classList.add('interactive');
+            }
+        });
+
+        // Fungsi interaksi buka tutup surat
+        function bukaSurat() {
+            document.getElementById('card').classList.add('open');
+            letter.style.display = 'none';
+            playMusic();
+        }
+
+        function tutupSurat() {
+            document.getElementById('card').classList.remove('open');
+            letter.style.display = 'block';
+            letter.classList.remove('interactive');
+            // Reset animasi biar bisa terbang lagi kalau mau
+        }
+
+        // Fungsi Kontrol Musik
+        const music = document.getElementById('bg-music');
+        function playMusic() {
+            music.play().catch(() => {
+                console.log("Autoplay diblokir browser, silakan klik tombol musik di pojok kanan bawah.");
+            });
+        }
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+    </script>
 </body>
 </html>
