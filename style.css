@@ -1,4 +1,4 @@
-/* --- Konfigurasi Dasar --- */
+/* --- Reset & Font --- */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body, html {
     height: 100%;
     overflow: hidden;
     font-family: 'Lora', serif;
-    background-color: #0b1914;
+    background-color: #f7f5f0;
 }
 
 .hidden {
@@ -19,19 +19,19 @@ body, html {
 
 .handwriting {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: #4a3b32;
+    font-size: 3rem;
+    color: #5c4d4d;
     margin-bottom: 20px;
 }
 
-/* --- Fase 1: Welcome Screen --- */
+/* --- Fase 1: Welcome Screen (Tema Pastel & Bunga) --- */
 #welcome-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
+    background: linear-gradient(135deg, #ffe5ec 0%, #f0f4f8 50%, #e8f5e9 100%); /* Warna grading pastel */
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -41,33 +41,82 @@ body, html {
 
 .welcome-content {
     text-align: center;
-    color: #880e4f;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    z-index: 10;
 }
 
-.welcome-content h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 4rem;
-    margin-bottom: 10px;
+.question {
+    font-size: 1.1rem;
+    color: #7d6b6b;
+    margin: 15px 0 25px 0;
+    font-style: italic;
 }
 
-.welcome-content button {
-    margin-top: 20px;
-    padding: 10px 30px;
-    background-color: #fff;
-    border: 2px solid #880e4f;
-    border-radius: 30px;
+/* Tombol Pilihan Pilihan */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-choice {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
     font-family: 'Lora', serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.welcome-content button:hover {
-    background-color: #880e4f;
-    color: white;
+.btn-yes {
+    background-color: #ffb7b2; /* Pastel Pink */
+    color: #5c3a3a;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 183, 178, 0.4);
 }
 
-/* --- Fase 2 & 3: Enchanted Forest & Kereta --- */
+.btn-no {
+    background-color: #cfbcdf; /* Pastel Purple */
+    color: #4a3b54;
+}
+
+.btn-choice:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Animasi Bunga Berhamburan */
+.flower-petal {
+    position: absolute;
+    top: -50px;
+    font-size: 2rem;
+    animation: fall linear infinite;
+    user-select: none;
+}
+
+.pink { left: 10%; animation-duration: 6s; }
+.blue { left: 40%; animation-duration: 8s; }
+.yellow { left: 60%; animation-duration: 7s; }
+
+@keyframes fall {
+    0% {
+        top: -50px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        top: 105vh;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* --- Fase 2: Main Scene (Hutan) --- */
 #main-scene {
     position: relative;
     width: 100%;
@@ -93,7 +142,7 @@ body, html {
     filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
 }
 
-/* --- Fase 3: Flying Letter --- */
+/* --- Fase 3: Flying Letter & Modal --- */
 .flying-letter {
     position: absolute;
     top: -100px;
@@ -103,21 +152,15 @@ body, html {
     opacity: 0;
     transform: translateX(-50%);
     filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.3));
-    transition: transform 0.3s ease;
 }
 
-.flying-letter:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-
-/* --- Fase 4 & 5: The Letter & Reply Modal --- */
 #letter-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     z-index: 200;
     display: flex;
@@ -130,65 +173,43 @@ body, html {
 .letter-container {
     width: 90%;
     max-width: 500px;
-    min-height: 400px;
-    background-color: #fdfaf6;
-    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    background-color: #fffdfa;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     text-align: center;
-}
-
-.letter-container p {
-    line-height: 1.8;
-    color: #333;
-    margin-bottom: 15px;
 }
 
 textarea {
     width: 100%;
-    height: 150px;
+    height: 120px;
     padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     background: transparent;
     font-family: 'Lora', serif;
-    font-size: 1rem;
     resize: none;
     margin-bottom: 20px;
 }
 
-textarea:focus {
-    outline: none;
-    border-color: #880e4f;
-}
-
 .btn-reply, .btn-send {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #4a3b32;
+    padding: 10px 25px;
+    background-color: #5c4d4d;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-family: 'Lora', serif;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-family: 'Lora', serif;
 }
 
-.btn-reply:hover, .btn-send:hover {
-    background-color: #2a201b;
-}
-
-/* --- Animasi --- */
+/* --- Keyframes Pergerakan --- */
 @keyframes moveCarriage {
     0% { left: -200px; }
     100% { left: 110vw; }
 }
 
 @keyframes flyDown {
-    0% { top: -100px; left: 40%; transform: rotate(-15deg); }
-    25% { top: 20%; left: 60%; transform: rotate(10deg); }
-    50% { top: 45%; left: 45%; transform: rotate(-5deg); }
-    75% { top: 55%; left: 55%; transform: rotate(5deg); }
+    0% { top: -100px; left: 45%; transform: rotate(-10deg); }
+    50% { top: 40%; left: 55%; transform: rotate(10deg); }
     100% { top: 65%; left: 50%; transform: rotate(0deg); }
 }
