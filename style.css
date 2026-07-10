@@ -1,215 +1,529 @@
-/* --- Reset & Font --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/*========================
+
+RESET
+
+========================*/
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Lora', serif;
-    background-color: #f7f5f0;
+body{
+
+background:
+radial-gradient(circle at center,
+#274c97 0%,
+#132c65 35%,
+#0b1d47 65%,
+#05122e 100%);
+
+font-family:'Poppins',sans-serif;
+
+overflow-x:hidden;
+
+color:white;
+
 }
 
-.hidden {
-    display: none !important;
+/*========================
+
+SCROLLBAR
+
+========================*/
+
+::-webkit-scrollbar{
+width:8px;
 }
 
-.handwriting {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3rem;
-    color: #5c4d4d;
-    margin-bottom: 20px;
+::-webkit-scrollbar-thumb{
+
+background:#7ba9ff;
+
+border-radius:50px;
+
 }
 
-/* --- Fase 1: Welcome Screen (Tema Pastel & Bunga) --- */
-#welcome-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ffe5ec 0%, #f0f4f8 50%, #e8f5e9 100%); /* Warna grading pastel */
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 1s ease-in-out;
+/*========================
+
+NAVBAR
+
+========================*/
+
+nav{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:25px 80px;
+
+z-index:999;
+
+backdrop-filter:blur(10px);
+
 }
 
-.welcome-content {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    z-index: 10;
+.logo{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:28px;
+
+letter-spacing:2px;
+
 }
 
-.question {
-    font-size: 1.1rem;
-    color: #7d6b6b;
-    margin: 15px 0 25px 0;
-    font-style: italic;
+nav ul{
+
+display:flex;
+
+gap:35px;
+
+list-style:none;
+
 }
 
-/* Tombol Pilihan Pilihan */
-.button-group {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+nav a{
+
+text-decoration:none;
+
+color:white;
+
+opacity:.75;
+
+font-size:14px;
+
+transition:.4s;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
 }
 
-.btn-choice {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 25px;
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+nav a:hover{
+
+opacity:1;
+
+color:#8ebdff;
+
 }
 
-.btn-yes {
-    background-color: #ffb7b2; /* Pastel Pink */
-    color: #5c3a3a;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(255, 183, 178, 0.4);
+/*========================
+
+HERO
+
+========================*/
+
+.hero{
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+position:relative;
+
 }
 
-.btn-no {
-    background-color: #cfbcdf; /* Pastel Purple */
-    color: #4a3b54;
+.mini{
+
+font-family:'Cormorant Garamond',serif;
+
+font-style:italic;
+
+opacity:.7;
+
+margin-bottom:20px;
+
+font-size:20px;
+
 }
 
-.btn-choice:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+.hero h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:95px;
+
+font-weight:700;
+
+text-shadow:
+
+0 0 20px rgba(255,255,255,.15);
+
 }
 
-/* Animasi Bunga Berhamburan */
-.flower-petal {
-    position: absolute;
-    top: -50px;
-    font-size: 2rem;
-    animation: fall linear infinite;
-    user-select: none;
+.hero h2{
+
+font-family:'Cormorant Garamond',serif;
+
+font-style:italic;
+
+font-size:78px;
+
+color:#9ebcff;
+
+margin-top:-15px;
+
+margin-bottom:40px;
+
 }
 
-.pink { left: 10%; animation-duration: 6s; }
-.blue { left: 40%; animation-duration: 8s; }
-.yellow { left: 60%; animation-duration: 7s; }
+/*========================
 
-@keyframes fall {
-    0% {
-        top: -50px;
-        transform: translateX(0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        top: 105vh;
-        transform: translateX(100px) rotate(360deg);
-        opacity: 0.3;
-    }
+ENVELOPE
+
+========================*/
+
+.envelope{
+
+width:320px;
+
+height:210px;
+
+background:#5579ab;
+
+border-radius:8px;
+
+position:relative;
+
+cursor:pointer;
+
+box-shadow:
+
+0 0 40px rgba(102,155,255,.35);
+
+transition:.5s;
+
+border:2px solid rgba(255,255,255,.5);
+
 }
 
-/* --- Fase 2: Main Scene (Hutan) --- */
-#main-scene {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.envelope:hover{
+
+transform:translateY(-10px) scale(1.05);
+
 }
 
-.forest-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=2074&auto=format&fit=crop') no-repeat center center/cover;
-    filter: brightness(0.7) contrast(1.1);
+.envelope::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+clip-path:polygon(0 0,100% 0,50% 58%);
+
+background:#6c8fc2;
+
 }
 
-.carriage {
-    position: absolute;
-    bottom: 20%;
-    left: -200px;
-    width: 150px;
-    height: 100px;
-    background: url('https://cdn-icons-png.flaticon.com/512/8207/8207869.png') no-repeat center/contain;
-    animation: moveCarriage 12s linear infinite;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+.envelope::after{
+
+content:"";
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+clip-path:polygon(0 100%,50% 55%,100% 100%);
+
+background:#4c709f;
+
 }
 
-/* --- Fase 3: Flying Letter & Modal --- */
-.flying-letter {
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    font-size: 4rem;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateX(-50%);
-    filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.3));
+.letter-inside{
+
+position:absolute;
+
+width:90%;
+
+height:90%;
+
+background:white;
+
+left:5%;
+
+top:5%;
+
+border-radius:5px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:60px;
+
+color:#1e3c73;
+
+transition:.6s;
+
+z-index:-1;
+
 }
 
-#letter-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    z-index: 200;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+.envelope.open .letter-inside{
+
+top:-120px;
+
+z-index:2;
+
 }
 
-.letter-container {
-    width: 90%;
-    max-width: 500px;
-    background-color: #fffdfa;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    text-align: center;
+/*========================
+
+BUTTON
+
+========================*/
+
+#musicBtn{
+
+margin-top:35px;
+
+padding:14px 30px;
+
+background:#5f8fff;
+
+border:none;
+
+border-radius:50px;
+
+font-size:15px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.4s;
+
 }
 
-textarea {
-    width: 100%;
-    height: 120px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: transparent;
-    font-family: 'Lora', serif;
-    resize: none;
-    margin-bottom: 20px;
+#musicBtn:hover{
+
+transform:scale(1.08);
+
+background:#81a9ff;
+
+box-shadow:
+
+0 0 20px rgba(120,170,255,.6);
+
 }
 
-.btn-reply, .btn-send {
-    padding: 10px 25px;
-    background-color: #5c4d4d;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: 'Lora', serif;
+/*========================
+
+HAPPY BIRTHDAY
+
+========================*/
+
+.birthday{
+
+min-height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:120px;
+
 }
 
-/* --- Keyframes Pergerakan --- */
-@keyframes moveCarriage {
-    0% { left: -200px; }
-    100% { left: 110vw; }
+.small{
+
+font-family:'Cormorant Garamond',serif;
+
+font-style:italic;
+
+font-size:24px;
+
+opacity:.8;
+
+margin-bottom:20px;
+
 }
 
-@keyframes flyDown {
-    0% { top: -100px; left: 45%; transform: rotate(-10deg); }
-    50% { top: 40%; left: 55%; transform: rotate(10deg); }
-    100% { top: 65%; left: 50%; transform: rotate(0deg); }
+.birthday h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:95px;
+
+margin-bottom:30px;
+
 }
+
+.birthday span{
+
+display:block;
+
+font-style:italic;
+
+color:#9ebcff;
+
+}
+
+.birthday p{
+
+max-width:700px;
+
+line-height:2;
+
+opacity:.8;
+
+font-size:18px;
+
+}
+
+/*========================
+
+REASONS
+
+========================*/
+
+.reasons{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:70px;
+
+padding:120px;
+
+}
+
+.photo{
+
+width:270px;
+
+overflow:hidden;
+
+border-radius:18px;
+
+box-shadow:
+
+0 0 30px rgba(100,150,255,.4);
+
+transition:.4s;
+
+}
+
+.photo:nth-child(1){
+
+transform:rotate(-4deg);
+
+}
+
+.photo:nth-child(3){
+
+transform:rotate(4deg);
+
+}
+
+.photo:hover{
+
+transform:scale(1.06);
+
+}
+
+.photo img{
+
+width:100%;
+
+display:block;
+
+}
+
+.card{
+
+width:500px;
+
+padding:50px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.12);
+
+text-align:center;
+
+}
+
+.card h2{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:55px;
+
+margin:25px 0;
+
+}
+
+.card span{
+
+display:block;
+
+font-style:italic;
+
+color:#9ebcff;
+
+}
+
+.card p{
+
+line-height:2;
+
+opacity:.8;
+
+}
+
+/* lanjut di Part 3 */
