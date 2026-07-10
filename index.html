@@ -1,99 +1,276 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Letter</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+<div class="hearts"></div>
 
-    <div id="welcome-screen">
-        <div class="flower-petal pink">🌸</div>
-        <div class="flower-petal blue">🦋</div>
-        <div class="flower-petal yellow">✨</div>
-        <div class="flower-petal pink" style="left:20%; animation-delay:2s;">🌸</div>
-        <div class="flower-petal blue" style="left:70%; animation-delay:1.5s;">🦋</div>
-        <div class="flower-petal yellow" style="left:85%; animation-delay:3s;">✨</div>
+<audio id="bgMusic" loop>
+    <!-- Ganti dengan file audio milikmu -->
+    <source src="music/always.mp3" type="audio/mpeg">
+</audio>
 
-        <div class="welcome-content">
-            <h1 class="handwriting">Halo, Tuan Putri...</h1>
-            <p>Ada sebuah surat misterius yang jatuh di hutan ajaib.</p>
-            <p class="question">Apakah kamu ingin melihat isi suratnya?</p>
-            
-            <div class="button-group">
-                <button class="btn-choice btn-yes" onclick="startExperience()">Mau Mau! ✨</button>
-                <button class="btn-choice btn-no" onclick="refuseLetter()">Enggak Dulu 🤭</button>
-            </div>
-        </div>
-    </div>
+<nav>
 
-    <div id="main-scene" class="hidden">
-        <div class="forest-bg"></div>
-        <div class="carriage"></div>
-        <div class="flying-letter" id="flyingLetter" onclick="openLetter()">✉️</div>
-    </div>
+<div class="logo">♡ Birthday</div>
 
-    <div id="letter-modal" class="hidden">
-        <div class="letter-container">
-            <div class="letter-front" id="letterFront">
-                <h2 class="handwriting">Untukmu...</h2>
-                <p>Semoga harimu seindah warna pastel di awal tadi. Ingatlah bahwa kamu berharga dan selalu bersinar.</p>
-                <button class="btn-reply" onclick="flipToReply()">Balas Surat</button>
-            </div>
+<ul>
 
-            <div class="letter-back hidden" id="letterBack">
-                <h2 class="handwriting">Tulis Balasanmu:</h2>
-                <textarea placeholder="Ketik jawabanmu di sini ya..."></textarea>
-                <button class="btn-send" onclick="sendReply()">Terbangkan Balasan 🕊️</button>
-            </div>
-        </div>
-    </div>
+<li><a href="#home">Home</a></li>
 
-    <script>
-        function startExperience() {
-            // Putar lagu Daniel Caesar - Always
-            const music = document.getElementById('bgMusic');
-            music.play().catch(e => console.log("Audio play diblokir browser."));
+<li><a href="#letter">Letter</a></li>
 
-            // Transisi keluar welcome screen
-            const welcome = document.getElementById('welcome-screen');
-            welcome.style.opacity = '0';
-            
-            setTimeout(() => {
-                welcome.style.display = 'none';
-                document.getElementById('main-scene').classList.remove('hidden');
-                
-                // Surat terbang muncul setelah kereta lewat (4 detik)
-                setTimeout(() => {
-                    const letter = document.getElementById('flyingLetter');
-                    letter.style.opacity = '1';
-                    letter.style.animation = 'flyDown 4s ease-in-out forwards';
-                }, 4000);
-            }, 1000);
-        }
+<li><a href="#reasons">Reasons</a></li>
 
-        function refuseLetter() {
-            alert("Yah... keretanya putar balik deh 🤭 Buka lagi kalau sudah siap ya!");
-        }
+<li><a href="#memory">Memory</a></li>
 
-        function openLetter() {
-            const modal = document.getElementById('letter-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.style.opacity = '1', 10);
-        }
+<li><a href="#video">Video</a></li>
 
-        function flipToReply() {
-            document.getElementById('letterFront').classList.add('hidden');
-            document.getElementById('letterBack').classList.remove('hidden');
-        }
+<li><a href="#final">Final</a></li>
 
-        function sendReply() {
-            alert('Balasanmu sudah berubah jadi burung kertas dan terbang ke langit! ✨');
-        }
-    </script>
+</ul>
+
+</nav>
+
+<section class="hero" id="home">
+
+<p class="mini">a little surprise</p>
+
+<h1>You Got</h1>
+
+<h2>A Mail</h2>
+
+<div class="envelope" id="envelope">
+
+<div class="letter-inside">
+
+💌
+
+</div>
+
+</div>
+
+<p class="click">CLICK THE ENVELOPE TO OPEN</p>
+
+<button id="musicBtn">
+🎵 Play Music
+</button>
+
+</section>
+
+<section class="birthday">
+
+<p class="small">
+For You
+</p>
+
+<h1>
+
+Happy Birthday,
+
+<span>My Love</span>
+
+</h1>
+
+<p>
+
+Every moment with you becomes a beautiful memory.
+
+Thank you for always making my life brighter.
+
+I hope this birthday becomes the beginning
+
+of another wonderful year for you.
+
+</p>
+
+</section>
+
+<section class="reasons" id="reasons">
+
+<div class="photo">
+
+<img src="images/1.jpg">
+
+</div>
+
+<div class="card">
+
+<p>💙✨💙</p>
+
+<h2>
+
+Today is the day
+
+<span>the world became</span>
+
+more beautiful.
+
+</h2>
+
+<p>
+
+The day you were born is the best thing
+
+that ever happened to this world—
+
+and to me.
+
+I hope we'll always be together,
+
+and I'll always be the home
+
+you return to.
+
+</p>
+
+</div>
+
+<div class="photo">
+
+<img src="images/2.jpg">
+
+</div>
+
+</section>
+
+<section class="letter" id="letter">
+
+<div class="letter-card">
+
+<div class="badge">
+
+💌 a little letter
+
+</div>
+
+<h2>
+
+Dear Love,
+
+</h2>
+
+<p>
+
+Happy Birthday ❤️
+
+Thank you for coming into my life.
+
+Thank you for every laugh,
+
+every late-night conversation,
+
+every smile,
+
+and every memory we've created together.
+
+</p>
+
+<p>
+
+I hope your dreams come true,
+
+your days are always filled
+
+with happiness,
+
+and I get to celebrate
+
+many more birthdays with you.
+
+</p>
+
+<p>
+
+I love you.
+
+Always.
+
+</p>
+
+</div>
+
+</section>
+
+<section class="memory" id="memory">
+
+<h2>Our Memories</h2>
+
+<div class="gallery">
+
+<img src="images/1.jpg">
+
+<img src="images/2.jpg">
+
+<img src="images/3.jpg">
+
+<img src="images/4.jpg">
+
+<img src="images/5.jpg">
+
+<img src="images/6.jpg">
+
+</div>
+
+</section>
+
+<section class="video" id="video">
+
+<h2>
+
+A Little Video
+
+</h2>
+
+<video controls>
+
+<source src="video/video.mp4">
+
+</video>
+
+</section>
+
+<section class="final" id="final">
+
+<h1>
+
+Thank You
+
+❤️
+
+</h1>
+
+<p>
+
+I hope this little website
+
+can remind you
+
+how special you are.
+
+No matter what happens,
+
+I'll always be cheering for you.
+
+Happy Birthday.
+
+</p>
+
+</section>
+
+<script src="script.js"></script>
+
 </body>
 </html>
